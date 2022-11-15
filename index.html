@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify API</title>
+</head>
+
+<body>
+    <div id="result"></div>
+
+    <script>
+        const result = document.getElementById('result');
+        const url = window.location.href + 'api/';
+        setInterval(() => {
+            fetch(url)
+                .then(response => response.json())
+                .then(data => result.innerHTML = JSON.stringify(data))
+                .catch(error => console.error(error));
+        }, 10000);
+    </script>
+</body>
+
+</html>

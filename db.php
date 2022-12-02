@@ -1,23 +1,23 @@
 <?php
-error_reporting(E_ALL);
-$env = 'development';
-if ($env == 'production') {
+error_reporting(0);
+// $env = 'development';
+// if ($env == 'production') {
     try {
-        $pdo = new PDO('mysql:host=localhost;dbname=dbname', 'user', 'pw');
+        $pdo = new PDO('mysql:host=localhost;dbname=****', '****', '****');
     } catch (PDOException $e) {
         die(json_encode(['error' => 'Connection failed: ' . $e->getMessage()]));
     }
-    define('CALLBACK_URI', '');
-} elseif ($env == 'development') {
-    try {
-        $pdo = new PDO('mysql:host=localhost;dbname=spotify', 'root', '');
-    } catch (PDOException $e) {
-        die(json_encode(['error' => 'Connection failed: ' . $e->getMessage()]));
-    }
-    define('CALLBACK_URI', 'http://localhost/spotify/oauth/callback.php');
-} else {
-    die(json_encode(['error' => 'Environment not set']));
-}
+    define('CALLBACK_URI', 'oauth/callback.php');
+// } elseif ($env == 'development') {
+//     try {
+//         $pdo = new PDO('mysql:host=localhost;dbname=spotify', 'root', '');
+//     } catch (PDOException $e) {
+//         die(json_encode(['error' => 'Connection failed: ' . $e->getMessage()]));
+//     }
+//     define('CALLBACK_URI', 'http://localhost/spotify/oauth/callback.php');
+// } else {
+//     die(json_encode(['error' => 'Environment not set']));
+// }
 
 $result = $pdo->query("SELECT * FROM tokens")->fetchAll(PDO::FETCH_ASSOC);
 foreach ($result as $token) {
